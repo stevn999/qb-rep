@@ -1,16 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-dump = function(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. dump(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
-end
+
 local function getTime()
    return os.time()
 end
@@ -28,7 +17,6 @@ QBCore.Commands.Add('checkrep', 'Check the reputation of a player', {{name='Play
    if otherRep == nil then
       otherRep = 0
    end
-   print(dump(otherPlayer.PlayerData.charinfo["firstname"]))
    playerName = otherPlayer.PlayerData.charinfo["firstname"].. " " .. otherPlayer.PlayerData.charinfo["lastname"]
    TriggerClientEvent("QBCore:Notify",source, playerName ..'\'s reputation: ' .. otherRep, 'success')
 end,"user")
